@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 21nd Birthday Vina!</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ffb199, #ffd6a5);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+#intro {
+  background: linear-gradient(135deg, #ff5f9e, #ff9966);
+}
+
+h1 {
+  font-size: clamp(2.3rem, 8vw, 4rem);
+  margin: 15px 0;
+  text-shadow: 2px 4px 10px #b94b72;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+button {
+  border: none;
+  background: white;
+  color: #ff568b;
+  padding: 15px 28px;
+  border-radius: 40px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 8px;
+  box-shadow: 0 5px 15px #a83b5c55;
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.card {
+  background: #ffffff25;
+  backdrop-filter: blur(12px);
+  border: 1px solid #ffffff66;
+  padding: 30px;
+  border-radius: 25px;
+  width: min(90%, 600px);
+  box-shadow: 0 10px 35px #9e315533;
+  margin: 20px auto;
+}
+
+.cake {
+  font-size: 110px;
+  animation: bounce 1.5s infinite;
+  margin: 15px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+.gift {
+  font-size: 110px;
+  cursor: pointer;
+  transition: .4s;
+  display: inline-block;
+}
+
+.gift:hover {
+  transform: rotate(15deg) scale(1.15);
+}
+
+#letter {
+  white-space: pre-line;
+  text-align: left;
+}
+
+.balloon {
+  position: fixed;
+  bottom: -120px;
+  font-size: 45px;
+  animation: floatUp 9s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-120vh) rotate(25deg);
+  }
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.sparkle {
+  position: fixed;
+  top: -30px;
+  font-size: 24px;
+  animation: fall 4s linear forwards;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+footer {
+  padding: 25px;
+  font-size: 14px;
+  opacity: .8;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<section id="intro">
+  <div style="font-size:75px">🎉🎈🎊</div>
+  <p>A Special Celebration For</p>
+  <h1>PENGUIN!</h1>
+  <h2>21nd Birthday</h2>
+  <p>Someone special deserves a special surprise...</p>
+  <button onclick="startParty()">OPEN YOUR SURPRISE 🎁</button>
+</section>
+
+<section id="party" class="hidden">
+  <h1>HAPPY BIRTHDAY!</h1>
+  <h2>🎂 VINA 🎂</h2>
+  <div style="font-size:65px">🎈🎉🎈</div>
+  <div class="card">
+    <div class="cake">🎂</div>
+    <h2>Make a Wish! ✨</h2>
+    <p>22 looks like another wonderful chapter waiting to begin!</p>
+    <button onclick="celebrate()">BLOW THE CANDLES 🎂</button>
+  </div>
+</section>
+
+<section id="gift" class="hidden">
+  <h1>A LITTLE SURPRISE</h1>
+  <p>There's something waiting just for you!</p>
+  <div class="gift" onclick="openGift()">🎁</div>
+  <p>Tap the gift box to open it!</p>
+  <div id="giftMessage" class="card hidden">
+    <h2>🎊 SURPRISE! 🎊</h2>
+    <p>Wishing you happiness, laughter, beautiful memories,
+    and countless reasons to smile!</p>
+  </div>
+</section>
+
+<section id="message" class="hidden">
+  <div class="card">
+    <h1>💌 A Birthday Letter</h1>
+    <p id="letter">Dear Vina,
+
+Happy 21nd Birthday!
+
+May this new chapter of your life bring you more happiness,
+success, exciting adventures, and unforgettable memories.
+
+Always remember that you deserve all the beautiful things
+life has to offer.
+
+Keep smiling, keep dreaming, and keep being yourself.
+
+Enjoy your special day!
+
+With warm wishes,
+Someone who wishes you the best. ❤️</p>
+    <button onclick="finale()">ONE LAST SURPRISE ✨</button>
+  </div>
+</section>
+
+<section id="ending" class="hidden">
+  <div style="font-size:85px">🎆🎇🎆</div>
+  <h1>HAPPY 22ND BIRTHDAY, VINA!</h1>
+  <div class="card">
+    <h2>Make this year unforgettable! ❤️</h2>
+    <p>May all your wishes come true. Enjoy your day!</p>
+  </div>
+  <button onclick="location.reload()">WATCH AGAIN 🔄</button>
+  <footer>Made with ❤️ for Vina</footer>
+</section>
+
+<audio id="music" loop>
+  <source src="birthday-song.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" class="hidden"
+style="position:fixed;right:15px;top:15px;z-index:30"
+onclick="toggleMusic()">🔊 Music</button>
+
+<script>
+const sections = ["intro", "party", "gift", "message", "ending"];
+
+function showSection(id) {
+  sections.forEach(s => {
+    document.getElementById(s).classList.add("hidden");
+  });
+  document.getElementById(id).classList.remove("hidden");
+  window.scrollTo(0, 0);
+}
+
+function startParty() {
+  showSection("party");
+  document.getElementById("musicButton").classList.remove("hidden");
+
+  const music = document.getElementById("music");
+  music.play().catch(() => {
+    document.getElementById("musicButton").textContent =
+      "▶ Play Music";
+  });
+
+  launchConfetti();
+  setTimeout(() => showSection("gift"), 7000);
+}
+
+function celebrate() {
+  launchConfetti();
+  alert("🎂 Wish made! Happy Birthday, Vina! ❤️");
+}
+
+function openGift() {
+  document.getElementById("giftMessage").classList.remove("hidden");
+  launchConfetti();
+  setTimeout(() => showSection("message"), 6000);
+}
+
+function finale() {
+  showSection("ending");
+  launchConfetti();
+  setInterval(createSparkle, 250);
+}
+
+function toggleMusic() {
+  const music = document.getElementById("music");
+  if (music.paused) {
+    music.play();
+    document.getElementById("musicButton").textContent = "🔊 Music";
+  } else {
+    music.pause();
+    document.getElementById("musicButton").textContent = "🔇 Music";
+  }
+}
+
+function createBalloon() {
+  const balloon = document.createElement("div");
+  balloon.className = "balloon";
+  balloon.textContent = ["🎈", "🎈", "🎀", "🎉"][
+    Math.floor(Math.random() * 4)
+  ];
+  balloon.style.left = Math.random() * 100 + "vw";
+  balloon.style.animationDuration = (6 + Math.random() * 7) + "s";
+  document.body.appendChild(balloon);
+  setTimeout(() => balloon.remove(), 13000);
+}
+
+setInterval(createBalloon, 700);
+
+function createSparkle() {
+  const item = document.createElement("div");
+  item.className = "sparkle";
+  item.textContent = ["✨", "💖", "🎊", "⭐"][
+    Math.floor(Math.random() * 4)
+  ];
+  item.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(item);
+  setTimeout(() => item.remove(), 4000);
+}
+
+function launchConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const pieces = Array.from({length: 160}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * -canvas.height,
+    size: Math.random() * 8 + 4,
+    speed: Math.random() * 5 + 2,
+    color: ["#fff", "#ffdf70", "#ff4d91", "#a8f0ff"][
+      Math.floor(Math.random() * 4)
+    ]
+  }));
+
+  let frame = 0;
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    pieces.forEach(p => {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+      p.y += p.speed;
+      p.x += Math.sin(p.y / 30);
+    });
+
+    frame++;
+    if (frame < 150) requestAnimationFrame(animate);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  animate();
+}
+</script>
+
+</body>
+</html>
